@@ -1,4 +1,5 @@
-//
+// Copyright (c) 2018 by Alexander Dadukin (st235@yandex.ru)
+// All rights reserved.
 
 package st235.github.com.catovasia;
 
