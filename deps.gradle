@@ -1,0 +1,20 @@
+ext.vers = [
+        androidSupport: '27.1.1',
+        androidConstraint: '1.1.0',
+        retrofit: '2.4.0',
+        dagger: '2.11',
+]
+
+ext.libs = [
+        support: "com.android.support:appcompat-v7:$vers.androidSupport",
+        design: "com.android.support:design:$vers.androidSupport",
+        vectorDrawable: "com.android.support:support-vector-drawable:$vers.androidSupport",
+        constraint: "com.android.support.constraint:constraint-layout:$vers.androidConstraint",
+        retrofit: "com.squareup.retrofit2:retrofit:$vers.retrofit",
+        retrofitGsonConverter: "com.squareup.retrofit2:converter-gson:$vers.retrofit",
+        dagger: "com.google.dagger:dagger-android-support:$vers.dagger",
+]
+
+ext.annotationProcessors = [
+        dagger: "com.google.dagger:dagger-compiler:$vers.dagger",
+]
