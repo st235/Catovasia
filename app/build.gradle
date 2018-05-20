@@ -32,6 +32,10 @@ android {
             buildConfigField 'String', 'UNSPLASH_CLIENT_ID', readProperty('./local.properties', 'props.unsplash_api_key')
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -45,4 +49,19 @@ dependencies {
 
     implementation libs.retrofit
     implementation libs.retrofitGsonConverter
+
+    implementation libs.lifecycle
+    implementation libs.lifecycleTest
+    annotationProcessor annotationProcessors.lifecycle
+
+    implementation libs.room
+    implementation libs.roomTest
+    annotationProcessor annotationProcessors.room
+
+    implementation libs.navigationFragment
+    implementation libs.navigatiionUi
+    implementation libs.navigatiionTest
+
+    implementation libs.glide
+    annotationProcessor annotationProcessors.glide
 }
