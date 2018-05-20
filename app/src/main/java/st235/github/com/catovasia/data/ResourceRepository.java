@@ -1,6 +1,7 @@
 package st235.github.com.catovasia.data;
 
 import android.content.res.AssetManager;
+import android.support.annotation.CheckResult;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
@@ -47,9 +48,9 @@ public class ResourceRepository {
     }
 
     @MainThread
-    public void obtainCatNames(@NonNull final ThreadUtils.Callback<List<String>> callback) {
-        ThreadUtils.MainToWorkerMarshaller<List<String>> marshaller
-                = threadUtils.createMainToWorkerMarshaller(() -> {
+    @CheckResult
+    public ThreadUtils.MainToWorkerMarshaller<List<String>> obtainCatNames() {
+        return threadUtils.createMainToWorkerMarshaller(() -> {
             AssetFolder namesFolder = assetsProvider.provide("names").get(0);
             AssetFile file = namesFolder.find("default");
 
@@ -70,7 +71,6 @@ public class ResourceRepository {
             }
 
             return names;
-        }, callback);
-        marshaller.start();
+        });
     }
 }
