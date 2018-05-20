@@ -35,16 +35,17 @@ public class MainActivity extends AppCompatActivity {
                 .getCatovasiaComponent()
                 .inject(this);
 
-        resourceRepository.obtainCatNames(new ThreadUtils.Callback<List<String>>() {
-            @Override
-            public void onReady(@NonNull List<String> strings) {
-                Log.d(TAG, String.valueOf(strings));
-            }
+        resourceRepository.obtainCatNames()
+                .start(new ThreadUtils.Callback<List<String>>() {
+                    @Override
+                    public void onReady(@NonNull List<String> strings) {
+                        Log.d(TAG, String.valueOf(strings));
+                    }
 
-            @Override
-            public void onError(@NonNull Exception e) {
-                Log.e(TAG, "There was an error", e);
-            }
-        });
+                    @Override
+                    public void onError(@NonNull Exception e) {
+                        Log.e(TAG, "There was an error", e);
+                    }
+                });
     }
 }

@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.support.annotation.AnyThread;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
 import java.util.concurrent.Callable;
@@ -31,9 +32,8 @@ public final class ThreadUtils {
     }
 
     @MainThread
-    public <T> MainToWorkerMarshaller<T> createMainToWorkerMarshaller(@NonNull Callable<T> callable,
-                                                                      @NonNull Callback<T> callback) {
-        return new MainToWorkerMarshaller<>(callable, callback, this);
+    public <T> MainToWorkerMarshaller<T> createMainToWorkerMarshaller(@NonNull Callable<T> callable) {
+        return new MainToWorkerMarshaller<>(callable, this);
     }
 
     @AnyThread
@@ -51,22 +51,22 @@ public final class ThreadUtils {
         private final Callable<T> callable;
 
         @NonNull
-        private final Callback<T> callback;
-
-        @NonNull
         private final ThreadUtils threadUtils;
+
+        @Nullable
+        private Callback<T> callback;
 
         @MainThread
         private MainToWorkerMarshaller(@NonNull Callable<T> callable,
-                                       @NonNull Callback<T> callback,
                                        @NonNull ThreadUtils threadUtils) {
             this.callable = callable;
-            this.callback = callback;
             this.threadUtils = threadUtils;
         }
 
         @MainThread
-        public void start() {
+        public void start(@NonNull Callback<T> callback) {
+            this.callback = callback;
+
             threadUtils.postRunnableOnWorkerThread(() -> {
                 try {
                     T t = callable.call();
