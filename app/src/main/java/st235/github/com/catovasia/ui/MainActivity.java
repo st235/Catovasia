@@ -1,7 +1,7 @@
 // Copyright (c) 2018 by Alexander Dadukin (st235@yandex.ru)
 // All rights reserved.
 
-package st235.github.com.catovasia;
+package st235.github.com.catovasia.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,16 +12,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import st235.github.com.catovasia.data.NetRepository;
+import st235.github.com.catovasia.CatovasiaApp;
+import st235.github.com.catovasia.R;
 import st235.github.com.catovasia.data.ResourceRepository;
 import st235.github.com.catovasia.utils.ThreadUtils;
 
 public class MainActivity extends AppCompatActivity {
 
     private static String TAG = "[Catovasia] MainActivity";
-
-    @Inject
-    NetRepository netRepository;
 
     @Inject
     ResourceRepository resourceRepository;
