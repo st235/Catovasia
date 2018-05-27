@@ -5,18 +5,20 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
-import st235.github.com.catovasia.ui.FeedItem;
+import st235.github.com.catovasia.ui.items.Item;
 
+/**
+ * Provides picture from feed to view
+ */
 public class PictureViewModel extends ViewModel {
+    private final MutableLiveData<Item> selectedItem = new MutableLiveData<>();
 
-    private final MutableLiveData<FeedItem> selectedItem = new MutableLiveData<>();
-
-    public void select(@NonNull FeedItem item){
+    public void select(@NonNull Item item){
         selectedItem.setValue(item);
     }
 
     @NonNull
-    public LiveData<FeedItem> getSelectedItem() {
+    public LiveData<Item> getSelectedItem() {
         return selectedItem;
     }
 }

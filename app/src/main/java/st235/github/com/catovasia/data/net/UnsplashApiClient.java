@@ -3,7 +3,7 @@ package st235.github.com.catovasia.data.net;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import st235.github.com.catovasia.models.PictureResponse;
+import st235.github.com.catovasia.models.pictures.PictureResponse;
 
 public interface UnsplashApiClient {
 

@@ -50,6 +50,7 @@ licenses:
 before_script:
     # Create local.props
     - echo 'props.unsplash_api_key="api key"' >> local.properties
+    - echo 'props.giphy_api_key="api key"' >> local.properties
 
     # Check and allow permissions
     - chmod +x gradlew

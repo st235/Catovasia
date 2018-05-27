@@ -16,8 +16,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import st235.github.com.catovasia.data.net.UnsplashApiClient;
-import st235.github.com.catovasia.models.Picture;
-import st235.github.com.catovasia.models.PictureResponse;
+import st235.github.com.catovasia.models.pictures.Picture;
+import st235.github.com.catovasia.models.pictures.PictureResponse;
 import st235.github.com.catovasia.data.net.Result;
 
 @Singleton
