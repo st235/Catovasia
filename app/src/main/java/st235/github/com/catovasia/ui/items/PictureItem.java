@@ -1,10 +1,14 @@
-package st235.github.com.catovasia.ui;
+package st235.github.com.catovasia.ui.items;
 
 import android.support.annotation.NonNull;
+
 import st235.github.com.catovasia.R;
 
-public class FeedItem {
-    public static final int VIEW_TYPE = R.layout.feed_item;
+/**
+ * ViewType for pictures
+ */
+public class PictureItem implements Item {
+    public static final int VIEW_TYPE = R.layout.picture_item;
 
     @NonNull
     private String catName;
@@ -15,16 +19,17 @@ public class FeedItem {
     @NonNull
     private String pictureDominantColor;
 
-    public FeedItem(@NonNull String catName,
-                    @NonNull String fullPicture,
-                    @NonNull String thumbPicture,
-                    @NonNull String pictureDominantColor) {
+    public PictureItem(@NonNull String catName,
+                       @NonNull String fullPicture,
+                       @NonNull String thumbPicture,
+                       @NonNull String pictureDominantColor) {
         this.catName = catName;
         this.fullPicture = fullPicture;
         this.thumbPicture = thumbPicture;
         this.pictureDominantColor = pictureDominantColor;
     }
 
+    @Override
     public int getViewType() {
         return VIEW_TYPE;
     }
@@ -70,7 +75,7 @@ public class FeedItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FeedItem feedItem = (FeedItem) o;
+        PictureItem feedItem = (PictureItem) o;
 
         if (getCatName() != null ? !getCatName().equals(feedItem.getCatName()) : feedItem.getCatName() != null) return false;
         if (!getFullPicture().equals(feedItem.getFullPicture())) return false;

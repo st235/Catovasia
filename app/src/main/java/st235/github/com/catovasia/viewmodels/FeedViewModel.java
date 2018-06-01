@@ -6,11 +6,13 @@ import android.support.annotation.NonNull;
 import java.util.List;
 import javax.inject.Inject;
 import st235.github.com.catovasia.data.NetRepository;
-import st235.github.com.catovasia.models.Picture;
+import st235.github.com.catovasia.models.pictures.Picture;
 import st235.github.com.catovasia.data.net.Result;
 
+/**
+ * Provides feed from dataSources to view
+ */
 public class FeedViewModel extends ViewModel {
-
     private final NetRepository repository;
     private LiveData<Result<List<Picture>>> liveData;
 

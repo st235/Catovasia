@@ -4,23 +4,16 @@ import android.content.res.AssetManager;
 import android.support.annotation.CheckResult;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import st235.github.com.catovasia.R;
 import st235.github.com.catovasia.data.assets.AssetFile;
 import st235.github.com.catovasia.data.assets.AssetFolder;
 import st235.github.com.catovasia.data.assets.AssetsProvider;

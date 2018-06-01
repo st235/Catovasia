@@ -1,4 +1,4 @@
-package st235.github.com.catovasia.models;
+package st235.github.com.catovasia.models.pictures;
 
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
@@ -7,7 +7,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public final class Picture {
-
     @ColorInt
     private int color = Color.TRANSPARENT;
 

@@ -17,8 +17,10 @@ import st235.github.com.catovasia.R;
 import st235.github.com.catovasia.data.ResourceRepository;
 import st235.github.com.catovasia.utils.ThreadUtils;
 
+/**
+ * Activity for all fragments
+ */
 public class MainActivity extends AppCompatActivity {
-
     private static String TAG = "[Catovasia] MainActivity";
 
     @Inject

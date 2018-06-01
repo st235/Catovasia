@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import st235.github.com.catovasia.R;
+import st235.github.com.catovasia.ui.items.Item;
 import st235.github.com.catovasia.viewmodels.FeedViewModel;
 import st235.github.com.catovasia.viewmodels.PictureViewModel;
 
+/**
+ * Fragment for cats feed
+ */
 public class FeedFragment extends Fragment {
-
     private PictureViewModel pictureViewModel;
     private FeedViewModel feedViewModel;
     private int page;
@@ -38,7 +41,7 @@ public class FeedFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_feed, container, false);
     }
 
-    public void onItemClickListener(FeedItem item){
+    public void onItemClickListener(@NonNull Item item){
         pictureViewModel.select(item);
     }
 }

@@ -1,4 +1,4 @@
-package st235.github.com.catovasia.models;
+package st235.github.com.catovasia.models.pictures;
 
 import android.support.annotation.NonNull;
 
@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 
 public final class PictureResponse {
-
     public static final PictureResponse EMPTY_RESPONSE = new PictureResponse();
 
     @Expose

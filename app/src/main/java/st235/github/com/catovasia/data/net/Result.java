@@ -1,12 +1,10 @@
 package st235.github.com.catovasia.data.net;
 
-
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import static st235.github.com.catovasia.data.net.Result.Status.ERROR;
 import static st235.github.com.catovasia.data.net.Result.Status.SUCCESS;
-
 
 public class Result<T> {
 

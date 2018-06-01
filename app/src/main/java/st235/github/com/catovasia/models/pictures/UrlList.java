@@ -1,10 +1,9 @@
-package st235.github.com.catovasia.models;
+package st235.github.com.catovasia.models.pictures;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public final class UrlList {
-
     @Expose
     @SerializedName("full")
     private String fullPicture;
