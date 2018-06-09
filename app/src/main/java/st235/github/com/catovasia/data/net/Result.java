@@ -29,6 +29,21 @@ public class Result<T> {
         return new Result<>(ERROR, data, message);
     }
 
+    @NonNull
+    public Status getStatus() {
+        return status;
+    }
+
+    @Nullable
+    public T getData() {
+        return data;
+    }
+
+    @Nullable
+    public String getMessage() {
+        return message;
+    }
+
     protected enum Status {
         SUCCESS,
         ERROR;

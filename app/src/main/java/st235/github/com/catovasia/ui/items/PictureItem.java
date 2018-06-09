@@ -1,6 +1,7 @@
 package st235.github.com.catovasia.ui.items;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import st235.github.com.catovasia.R;
 
@@ -10,20 +11,16 @@ import st235.github.com.catovasia.R;
 public class PictureItem implements Item {
     public static final int VIEW_TYPE = R.layout.picture_item;
 
-    @NonNull
     private String catName;
     @NonNull
     private String fullPicture;
     @NonNull
     private String thumbPicture;
-    @NonNull
-    private String pictureDominantColor;
+    private int pictureDominantColor;
 
-    public PictureItem(@NonNull String catName,
-                       @NonNull String fullPicture,
+    public PictureItem(@NonNull String fullPicture,
                        @NonNull String thumbPicture,
-                       @NonNull String pictureDominantColor) {
-        this.catName = catName;
+                       int pictureDominantColor) {
         this.fullPicture = fullPicture;
         this.thumbPicture = thumbPicture;
         this.pictureDominantColor = pictureDominantColor;
@@ -39,8 +36,7 @@ public class PictureItem implements Item {
         return catName;
     }
 
-    @NonNull
-    public String getPictureDominantColor() {
+    public int getPictureDominantColor() {
         return pictureDominantColor;
     }
 
@@ -66,7 +62,7 @@ public class PictureItem implements Item {
         this.thumbPicture = thumbPicture;
     }
 
-    public void setPictureDominantColor(@NonNull String pictureDominantColor) {
+    public void setPictureDominantColor(int pictureDominantColor) {
         this.pictureDominantColor = pictureDominantColor;
     }
 
@@ -75,12 +71,12 @@ public class PictureItem implements Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PictureItem feedItem = (PictureItem) o;
+        PictureItem item = (PictureItem) o;
 
-        if (getCatName() != null ? !getCatName().equals(feedItem.getCatName()) : feedItem.getCatName() != null) return false;
-        if (!getFullPicture().equals(feedItem.getFullPicture())) return false;
-        if (!getThumbPicture().equals(feedItem.getThumbPicture())) return false;
-        return getPictureDominantColor().equals(feedItem.getPictureDominantColor());
+        if (getPictureDominantColor() != item.getPictureDominantColor()) return false;
+        if (getCatName() != null ? !getCatName().equals(item.getCatName()) : item.getCatName() != null) return false;
+        if (!getFullPicture().equals(item.getFullPicture())) return false;
+        return getThumbPicture().equals(item.getThumbPicture());
     }
 
     @Override
@@ -88,7 +84,7 @@ public class PictureItem implements Item {
         int result = getCatName() != null ? getCatName().hashCode() : 0;
         result = 31 * result + getFullPicture().hashCode();
         result = 31 * result + getThumbPicture().hashCode();
-        result = 31 * result + getPictureDominantColor().hashCode();
+        result = 31 * result + getPictureDominantColor();
         return result;
     }
 

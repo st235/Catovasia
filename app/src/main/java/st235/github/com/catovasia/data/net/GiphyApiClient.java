@@ -7,6 +7,6 @@ import st235.github.com.catovasia.models.gifs.GifResponse;
 
 public interface GiphyApiClient {
 
-    @GET("v1/gifs/search?q=funny+cats&limit=6")
+    @GET("v1/gifs/search?q=funny+cats&limit=5")
     Call<GifResponse> getCatsGifs(@Query("offset") int offset);
 }

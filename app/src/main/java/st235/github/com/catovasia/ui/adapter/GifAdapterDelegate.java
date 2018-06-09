@@ -15,6 +15,19 @@ import st235.github.com.catovasia.ui.items.Item;
  * Adapter delegate for Gif viewType
  */
 public class GifAdapterDelegate implements AdapterDelegate<List<Item>> {
+
+    @NonNull
+    private final GifAdapterDelegate.Callback callback;
+
+    public interface Callback {
+        void onItemClick(@NonNull Item item);
+        void loadGif(@NonNull String url, @NonNull String preview);
+    }
+
+    public GifAdapterDelegate(@NonNull Callback callback) {
+        this.callback = callback;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -24,9 +37,9 @@ public class GifAdapterDelegate implements AdapterDelegate<List<Item>> {
 
     @Override
     public void onBindViewHolder(@NonNull List<Item> items, @NonNull RecyclerView.ViewHolder holder, int position) {
-        GifAdapterDelegate.GifViewHolder gifViewHolder = (GifAdapterDelegate.GifViewHolder) holder;
         GifItem item = (GifItem) items.get(position);
-        //TODO(Chog0): bind data with databinding
+        holder.itemView.setOnClickListener(v -> callback.onItemClick(item));
+        callback.loadGif(item.getUrl(), item.getPreview());
     }
 
     @Override

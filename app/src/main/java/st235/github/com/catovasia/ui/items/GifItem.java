@@ -16,10 +16,13 @@ public class GifItem implements Item {
     private String url;
     @NonNull
     private String embedUrl;
+    @NonNull
+    private String preview;
 
-    public GifItem(@NonNull String embedUrl, @NonNull String url) {
+    public GifItem(@NonNull String embedUrl, @NonNull String url, @NonNull String preview) {
         this.embedUrl = embedUrl;
         this.url = url;
+        this.preview = preview;
     }
 
     @Override
@@ -45,29 +48,41 @@ public class GifItem implements Item {
         this.url = url;
     }
 
+    @NonNull
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(@NonNull String preview) {
+        this.preview = preview;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GifItem gifItem = (GifItem) o;
+        GifItem item = (GifItem) o;
 
-        if (!getEmbedUrl().equals(gifItem.getEmbedUrl())) return false;
-        return getUrl().equals(gifItem.getUrl());
+        if (!getUrl().equals(item.getUrl())) return false;
+        if (!getEmbedUrl().equals(item.getEmbedUrl())) return false;
+        return getPreview().equals(item.getPreview());
     }
 
     @Override
     public int hashCode() {
-        int result = getEmbedUrl().hashCode();
-        result = 31 * result + getUrl().hashCode();
+        int result = getUrl().hashCode();
+        result = 31 * result + getEmbedUrl().hashCode();
+        result = 31 * result + getPreview().hashCode();
         return result;
     }
 
     @Override
     public String toString() {
         return "GifItem{" +
-                "embedUrl='" + embedUrl + '\'' +
-                ", url='" + url + '\'' +
+                "url='" + url + '\'' +
+                ", embedUrl='" + embedUrl + '\'' +
+                ", preview='" + preview + '\'' +
                 '}';
     }
 }

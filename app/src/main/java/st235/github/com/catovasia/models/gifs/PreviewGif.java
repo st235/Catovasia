@@ -3,7 +3,7 @@ package st235.github.com.catovasia.models.gifs;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-class PreviewGif {
+public class PreviewGif {
     @Expose
     @SerializedName("url")
     private String url;
