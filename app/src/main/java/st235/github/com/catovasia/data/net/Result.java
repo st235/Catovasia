@@ -44,7 +44,7 @@ public class Result<T> {
         return message;
     }
 
-    protected enum Status {
+    public enum Status {
         SUCCESS,
         ERROR;
     }

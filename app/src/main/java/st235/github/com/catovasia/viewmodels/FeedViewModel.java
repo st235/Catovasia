@@ -6,6 +6,7 @@ import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,7 +15,7 @@ import st235.github.com.catovasia.data.NetRepository;
 import st235.github.com.catovasia.data.net.Result;
 import st235.github.com.catovasia.models.gifs.Data;
 import st235.github.com.catovasia.models.pictures.Picture;
-import st235.github.com.catovasia.ui.adapter.ItemBuilder;
+import st235.github.com.catovasia.ui.items.ItemBuilder;
 import st235.github.com.catovasia.ui.items.Item;
 
 /**
@@ -31,8 +32,7 @@ public class FeedViewModel extends ViewModel {
     private LiveData<List<Item>> gifItemsLiveData;
     private LiveData<Result<List<Picture>>> pictureLiveData;
     private LiveData<List<Item>> pictureItemsLiveData;
-    private List<Item> items;
-    private final MediatorLiveData<List<Item>> mediatorLiveData = new MediatorLiveData<>();
+    private final MediatorLiveData<Result<List<Item>>> mediatorLiveData = new MediatorLiveData<>();
 
     @Inject
     public FeedViewModel(@NonNull NetRepository repository,
@@ -41,25 +41,41 @@ public class FeedViewModel extends ViewModel {
         this.builder = builder;
     }
 
+    /**
+     * Method receives LiveData<Result<List<Picture>>> and LiveData<Result<List<Gif>>> from repository.
+     * If one of them returns error, this method returns error to view, if both return success,
+     * MediatorLiveData will get value.
+     * @param page for pagination
+     * @return MediatorLiveData<Result<List<Item>>>
+     */
     @NonNull
-    public LiveData<List<Item>> getFeedLiveData(int page) {
+    public LiveData<Result<List<Item>>> getFeedLiveData(int page) {
         int offset = calculateOffset(page);
         pictureLiveData = repository.getCatsPhotos(page);
         gifLiveData = repository.getCatGifs(offset);
 
-        pictureItemsLiveData = Transformations.map(pictureLiveData, items ->
-                builder.buildPictureItems(items.getData()));
-
+        if (pictureLiveData.getValue().getStatus() == Result.Status.ERROR){
+            mediatorLiveData.setValue(Result.createError(pictureLiveData.getValue().getMessage(),
+                    Collections.emptyList()));
+            return mediatorLiveData;
+        }
+        if (gifLiveData.getValue().getStatus() == Result.Status.ERROR){
+            mediatorLiveData.setValue(Result.createError(gifLiveData.getValue().getMessage(),
+                    Collections.emptyList()));
+            return mediatorLiveData;
+        }
+        pictureItemsLiveData = Transformations.map(pictureLiveData, resultItems ->
+                builder.buildPictureItems(resultItems.getData()));
         gifItemsLiveData = Transformations.map(gifLiveData, items ->
                 builder.buildGifItems(items.getData()));
 
         mediatorLiveData.addSource(pictureItemsLiveData, pictureItems -> {
-            if (gifItemsLiveData.getValue() != null && pictureItems !=null) {
+            if (gifItemsLiveData.getValue() != null && pictureItems != null) {
                 mediatorLiveData.setValue(builder.mergeItems(pictureItems, gifItemsLiveData.getValue()));
             }
         });
         mediatorLiveData.addSource(gifItemsLiveData, gifItems -> {
-            if (pictureItemsLiveData.getValue() != null && gifItems !=null) {
+            if (pictureItemsLiveData.getValue() != null && gifItems != null) {
                 mediatorLiveData.setValue(builder.mergeItems(pictureItemsLiveData.getValue(), gifItems));
             }
         });

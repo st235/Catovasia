@@ -1,9 +1,10 @@
-package st235.github.com.catovasia.ui.adapter;
+package st235.github.com.catovasia.ui.adapter.delegate;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import st235.github.com.catovasia.ui.items.Item;
@@ -16,10 +17,10 @@ public class MainAdapter extends RecyclerView.Adapter {
     @NonNull
     private final AdapterDelegateManager<List<Item>> adapterDelegateManager;
     @NonNull
-    private final List<Item> items;
+    private List<Item> items;
 
-    public MainAdapter(@NonNull List<Item> items) {
-        this.items = items;
+    public MainAdapter() {
+        this.items = new ArrayList<>();
         adapterDelegateManager = new AdapterDelegateManager<>();
     }
 
@@ -56,5 +57,16 @@ public class MainAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public void setItems(@NonNull List<Item> newItems){
+        items = newItems;
+        notifyDataSetChanged();
+    }
+
+    public void addItems(@NonNull List<Item> newItems){
+        int start = items.size();
+        items.addAll(newItems);
+        notifyItemRangeInserted(start, newItems.size());
     }
 }

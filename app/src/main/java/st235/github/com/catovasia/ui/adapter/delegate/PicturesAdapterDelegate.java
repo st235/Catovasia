@@ -1,4 +1,4 @@
-package st235.github.com.catovasia.ui.adapter;
+package st235.github.com.catovasia.ui.adapter.delegate;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

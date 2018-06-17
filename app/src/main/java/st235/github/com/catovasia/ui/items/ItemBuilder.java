@@ -1,4 +1,4 @@
-package st235.github.com.catovasia.ui.adapter;
+package st235.github.com.catovasia.ui.items;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Singleton;
 
+import st235.github.com.catovasia.data.net.Result;
 import st235.github.com.catovasia.models.gifs.Data;
 import st235.github.com.catovasia.models.pictures.Picture;
 import st235.github.com.catovasia.ui.items.GifItem;
@@ -29,7 +30,7 @@ public class ItemBuilder {
      * @return Items list
      */
     @NonNull
-    public List<Item> mergeItems(@NonNull List<Item> pictureItems, @NonNull List<Item> gifItems) {
+    public Result<List<Item>> mergeItems(@NonNull List<Item> pictureItems, @NonNull List<Item> gifItems) {
         List<Item> result = new ArrayList<>();
         for (int i = 0; i < pictureItems.size(); i++) {
             if ((i != 0) && (i % GIF_PLACE == 0)) {
@@ -38,7 +39,7 @@ public class ItemBuilder {
             result.add(pictureItems.get(i));
         }
         result.add(gifItems.get(gifItems.size() - 1));
-        return result;
+        return Result.createSuccess(result);
     }
 
     @NonNull
