@@ -22,7 +22,6 @@ import st235.github.com.catovasia.ui.items.Item;
  * Provides feed from dataSources to view
  */
 public class FeedViewModel extends ViewModel {
-    private static final int GIFS_PER_PAGE = 5;
 
     @NonNull
     private final NetRepository repository;
@@ -49,8 +48,7 @@ public class FeedViewModel extends ViewModel {
      * @return MediatorLiveData<Result<List<Item>>>
      */
     @NonNull
-    public LiveData<Result<List<Item>>> getFeedLiveData(int page) {
-        int offset = calculateOffset(page);
+    public LiveData<Result<List<Item>>> getFeedLiveData(int page, int offset) {
         pictureLiveData = repository.getCatsPhotos(page);
         gifLiveData = repository.getCatGifs(offset);
 
@@ -80,13 +78,5 @@ public class FeedViewModel extends ViewModel {
             }
         });
         return mediatorLiveData;
-    }
-
-    private int calculateOffset(int page) {
-        if (page == 1) {
-            return 0;
-        } else {
-            return (page - 1) * GIFS_PER_PAGE;
-        }
     }
 }

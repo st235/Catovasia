@@ -1,8 +1,9 @@
 package st235.github.com.catovasia.ui.adapter.state;
 
-public class ErrorState extends State {
+import android.support.annotation.NonNull;
 
-    public ErrorState(Paginator controller) {
+class ErrorNextPageLoadingState extends State{
+    ErrorNextPageLoadingState(@NonNull Paginator controller) {
         super(controller);
     }
 
@@ -10,6 +11,7 @@ public class ErrorState extends State {
     public void refresh() {
         super.refresh();
         paginator.setCurrentState(new ProgressState(paginator));
+        paginator.getViewController().showProgress(true);
         paginator.getViewController().showError(false, null);
         paginator.loadData(Paginator.FIRST_PAGE);
         paginator.getCurrentData().clear();
@@ -18,16 +20,14 @@ public class ErrorState extends State {
     @Override
     public void restart() {
         super.restart();
-        paginator.setCurrentState(new ProgressState(paginator));
+        paginator.setCurrentState(new ProgressPageState(paginator));
         paginator.getViewController().showPageProgress(true);
-        paginator.getViewController().showError(false, null);
-        paginator.loadData(Paginator.FIRST_PAGE);
-        paginator.getCurrentData().clear();
+        paginator.getViewController().showNextPageLoadingError(false, null);
+        paginator.loadData(paginator.getCurrentPage());
     }
 
     @Override
     public void release() {
         super.release();
-        paginator.setCurrentState(new ReleasedState(paginator));
     }
 }
